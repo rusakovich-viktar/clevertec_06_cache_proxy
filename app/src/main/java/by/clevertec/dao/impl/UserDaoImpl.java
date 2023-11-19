@@ -2,6 +2,10 @@ package by.clevertec.dao.impl;
 
 import by.clevertec.dao.UserDao;
 import by.clevertec.entity.User;
+import by.clevertec.proxy.annotation.CreateUser;
+import by.clevertec.proxy.annotation.DeleteUser;
+import by.clevertec.proxy.annotation.GetUser;
+import by.clevertec.proxy.annotation.UpdateUser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +26,7 @@ public class UserDaoImpl implements UserDao {
      * @param id ID пользователя.
      * @return Пользователь с указанным ID или null, если такого пользователя нет.
      */
+    @GetUser
     @Override
     public User get(int id) {
         return users.get(id);
@@ -32,6 +37,7 @@ public class UserDaoImpl implements UserDao {
      *
      * @return Список всех пользователей.
      */
+
     @Override
     public List<User> getAll() {
         return new ArrayList<>(users.values());
@@ -42,6 +48,7 @@ public class UserDaoImpl implements UserDao {
      *
      * @param user Пользователь для сохранения.
      */
+    @CreateUser
     @Override
     public void save(User user) {
         users.put(user.getId(), user);
@@ -52,6 +59,7 @@ public class UserDaoImpl implements UserDao {
      *
      * @param user Пользователь для обновления.
      */
+    @UpdateUser
     @Override
     public void update(User user) {
         users.put(user.getId(), user);
@@ -62,6 +70,7 @@ public class UserDaoImpl implements UserDao {
      *
      * @param user Пользователь для удаления.
      */
+    @DeleteUser
     @Override
     public void delete(User user) {
         users.remove(user.getId());
