@@ -1,0 +1,2 @@
+cache: LRU
+capacity: 25
