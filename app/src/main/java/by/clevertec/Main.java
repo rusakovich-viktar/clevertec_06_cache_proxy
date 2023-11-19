@@ -1,8 +1,12 @@
 package by.clevertec;
 
 import by.clevertec.util.YamlReader;
-
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+@Log4j2
 public class Main {
+
     public static void main(String[] args) {
 //        UserDtoValidator validator = new UserDtoValidator();
 //        UserDto userDto = new UserDto();
@@ -18,6 +22,7 @@ public class Main {
         String cacheType = YamlReader.chooseCacheType();
         String cacheCapacity = YamlReader.chooseCacheCapacity();
 
+        log.info("Cache Type: " + cacheType);
         System.out.println("Cache Type: " + cacheType);
         System.out.println("Cache Capacity: " + cacheCapacity);
     }

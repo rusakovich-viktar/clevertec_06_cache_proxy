@@ -6,11 +6,13 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import java.util.Set;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Класс UserDtoValidator предоставляет метод для валидации объектов UserDto.
  * Этот класс использует Validator из Jakarta Validation для проверки ограничений, определенных в классе UserDto.
  */
+@Log4j2
 public class UserDtoValidator {
 
     private final Validator validator;
@@ -36,10 +38,10 @@ public class UserDtoValidator {
 
         if (!violations.isEmpty()) {
             for (ConstraintViolation<UserDto> violation : violations) {
-                System.out.println(violation.getMessage());
+                log.info(violation.getMessage());
             }
         } else {
-            System.out.println("Валидация прошла успешно");
+            log.info("Валидация прошла успешно");
         }
     }
 }
