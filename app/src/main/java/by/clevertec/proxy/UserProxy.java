@@ -10,12 +10,14 @@ import by.clevertec.mapper.UserMapper;
 import by.clevertec.util.YamlReader;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
+@Log4j2
 public class UserProxy {
 
     private final Cache<Integer, User> userCache;
@@ -56,6 +58,7 @@ public class UserProxy {
 
     @Around("getUser() && args(id)")
     public Object getUser(ProceedingJoinPoint joinPoint, int id) throws Throwable {
+        log.info("Entering getUser advice with id: {}", id);
         User user = userCache.get(id);
         if (user != null) {
             return userMapper.convertToDto(user);
