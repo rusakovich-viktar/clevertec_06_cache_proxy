@@ -10,46 +10,36 @@ import by.clevertec.validation.UserDtoValidator;
 import org.mapstruct.factory.Mappers;
 
 public class Main {
-
     public static void main(String[] args) {
+
         UserDao userDao = new UserDaoImpl();
         UserMapperMapStruct userMapper = Mappers.getMapper(UserMapperMapStruct.class);
         UserDtoValidator userDtoValidator = new UserDtoValidator();
         UserService userService = new UserServiceImpl(userMapper, userDtoValidator, userDao);
 
-        // Создаем нового пользователя
-        UserDto userDto = new UserDto();
-        userDto.setId(1);
-        userDto.setName("Test User");
-        userDto.setEmail("Atut@mail.ru");
-        userDto.setPhoneNumber("+375447764650");
-        userService.saveUser(userDto);
+        UserDto user1 = new UserDto();
+        user1.setId(1);
+        user1.setName("Иван");
+        user1.setEmail("ivan@example.com");
+        user1.setPhoneNumber("+375291234567");
 
-        // Создаем еще одного пользователя
-        UserDto anotherUserDto = new UserDto();
-        anotherUserDto.setId(2);
-        anotherUserDto.setName("Another Test User");
-        anotherUserDto.setEmail("Atut@mail.ru");
-        anotherUserDto.setPhoneNumber("+375447764650");
-        userService.saveUser(anotherUserDto);
 
-        // Получаем пользователя и выводим его
-        UserDto retrievedUser = userService.getUser(1);
-        if (retrievedUser != null) {
-            System.out.println("Retrieved User: " + retrievedUser);
+        UserDto user2 = new UserDto();
+        user2.setId(2);
+        user2.setName("Петр");
+        user2.setEmail("petr@example.com");
+        user2.setPhoneNumber("+375291234568");
 
-            // Обновляем пользователя и выводим его
-            retrievedUser.setName("Updated User");
-            userService.updateUser(retrievedUser);
-            UserDto updatedUser = userService.getUser(1);
-            System.out.println("Updated User: " + updatedUser);
+        userService.saveUser(user1);
+        userService.saveUser(user2);
 
-            // Удаляем пользователя
-            userService.deleteUser(updatedUser);
-            UserDto deletedUser = userService.getUser(1);
-            System.out.println("Deleted User: " + deletedUser);
-        } else {
-            System.out.println("User not found");
-        }
+        UserDto user = userService.getUser(1);
+        System.out.println(user);
+        System.out.println(user);
+
+        user1.setName("Иван Петрович");
+        userService.updateUser(user1);
+
+        userService.deleteUser(user1);
     }
 }

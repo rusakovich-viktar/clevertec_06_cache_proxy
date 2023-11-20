@@ -8,7 +8,7 @@ import java.util.Map;
  * Класс LRUCache реализует интерфейс Cache с использованием алгоритма LRU (Least Recently Used) для управления кэшем.
  * Этот класс наследуется от LinkedHashMap, что позволяет ему использовать порядок доступа LinkedHashMap для реализации LRU.
  */
-public class LRUCache<K, V> extends LinkedHashMap<K, V> implements Cache<K, V> {
+public class LruCache<K, V> extends LinkedHashMap<K, V> implements Cache<K, V> {
     private final int capacity;
 
     /**
@@ -16,7 +16,7 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> implements Cache<K, V> {
      *
      * @param capacity Максимальный размер кэша.
      */
-    public LRUCache(int capacity) {
+    public LruCache(int capacity) {
         super(capacity, 0.75f, true);
         this.capacity = capacity;
     }

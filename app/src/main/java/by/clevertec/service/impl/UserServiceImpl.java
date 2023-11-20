@@ -1,10 +1,10 @@
 package by.clevertec.service.impl;
 
 import by.clevertec.dao.UserDao;
-import by.clevertec.dao.impl.UserDaoImpl;
 import by.clevertec.dto.UserDto;
 import by.clevertec.entity.User;
 import by.clevertec.mapper.UserMapperMapStruct;
+import by.clevertec.proxy.annotation.Cacheable;
 import by.clevertec.service.UserService;
 import by.clevertec.validation.UserDtoValidator;
 import java.util.List;
@@ -23,9 +23,9 @@ import org.mapstruct.factory.Mappers;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    UserMapperMapStruct userMapper = Mappers.getMapper(UserMapperMapStruct.class);
-    UserDtoValidator userDtoValidator = new UserDtoValidator();
-    UserDao userDao = new UserDaoImpl();
+    private UserMapperMapStruct userMapper = Mappers.getMapper(UserMapperMapStruct.class);
+    private UserDtoValidator userDtoValidator;
+    private UserDao userDao;
 
     /**
      * Возвращает UserDto для пользователя с указанным ID.
@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
      * @return UserDto для пользователя с указанным ID или null, если такого пользователя нет.
      */
     @Override
+    @Cacheable
     public UserDto getUser(int id) {
         User user = userDao.get(id);
         return user != null ? userMapper.convertToDto(user) : null;
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
      * @param userDto UserDto пользователя для сохранения.
      */
     @Override
+    @Cacheable
     public void saveUser(UserDto userDto) {
         userDtoValidator.validate(userDto);
         User user = userMapper.convertToEntity(userDto);
@@ -68,6 +70,7 @@ public class UserServiceImpl implements UserService {
      * @param userDto UserDto пользователя для обновления.
      */
     @Override
+    @Cacheable
     public void updateUser(UserDto userDto) {
         userDtoValidator.validate(userDto);
         User user = userMapper.convertToEntity(userDto);
@@ -80,6 +83,7 @@ public class UserServiceImpl implements UserService {
      * @param userDto UserDto пользователя для удаления.
      */
     @Override
+    @Cacheable
     public void deleteUser(UserDto userDto) {
         User user = userMapper.convertToEntity(userDto);
         userDao.delete(user);

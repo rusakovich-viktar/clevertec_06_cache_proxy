@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-class LRUCacheTest {
+class LruCacheTest {
     @Test
     public void testLRUCachePutAndGet() {
         // Given
-        LRUCache<Integer, String> cache = new LRUCache<>(3);
+        LruCache<Integer, String> cache = new LruCache<>(3);
         cache.put(1, "one");
         cache.put(2, "two");
         cache.put(3, "three");
@@ -24,7 +24,7 @@ class LRUCacheTest {
     @Test
     public void testLRUCacheEviction() {
         // Given
-        LRUCache<Integer, String> cache = new LRUCache<>(3);
+        LruCache<Integer, String> cache = new LruCache<>(3);
         cache.put(1, "one");
         cache.put(2, "two");
         cache.put(3, "three");
@@ -40,7 +40,7 @@ class LRUCacheTest {
     @Test
     public void testLRUCacheRemove() {
         // Given
-        LRUCache<Integer, String> cache = new LRUCache<>(3);
+        LruCache<Integer, String> cache = new LruCache<>(3);
         cache.put(1, "one");
         cache.put(2, "two");
         cache.put(3, "three");

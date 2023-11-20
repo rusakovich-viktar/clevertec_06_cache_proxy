@@ -7,7 +7,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 
-
 public interface UserMapperMapStruct {
 
     UserDto convertToDto(User user);

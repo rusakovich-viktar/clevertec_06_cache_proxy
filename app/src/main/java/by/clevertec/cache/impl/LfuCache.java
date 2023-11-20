@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Класс LFUCache реализует интерфейс Cache с использованием алгоритма LFU (Least Frequently Used) для управления кэшем.
  */
-public class LFUCache<K, V> implements Cache<K, V> {
+public class LfuCache<K, V> implements Cache<K, V> {
     private final Map<K, V> vals;
     private final Map<K, Integer> counts;
     private final Map<Integer, LinkedHashSet<K>> lists;
@@ -20,7 +20,7 @@ public class LFUCache<K, V> implements Cache<K, V> {
      *
      * @param capacity Максимальный размер кэша.
      */
-    public LFUCache(int capacity) {
+    public LfuCache(int capacity) {
         this.capacity = capacity;
         vals = new HashMap<>();
         counts = new HashMap<>();
