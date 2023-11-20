@@ -4,23 +4,28 @@ import by.clevertec.dao.UserDao;
 import by.clevertec.dao.impl.UserDaoImpl;
 import by.clevertec.dto.UserDto;
 import by.clevertec.entity.User;
-import by.clevertec.mapper.UserMapper;
+import by.clevertec.mapper.UserMapperMapStruct;
 import by.clevertec.service.UserService;
 import by.clevertec.validation.UserDtoValidator;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.mapstruct.factory.Mappers;
 
 /**
  * Класс UserServiceImpl реализует интерфейс UserService и предоставляет базовые операции CRUD (создание, чтение, обновление, удаление) для пользователей.
  * Этот класс использует UserDao для взаимодействия с базой данных и UserMapper для преобразования между User и UserDto.
  * Кроме того, он использует UserDtoValidator для проверки UserDto перед сохранением или обновлением.
  */
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    UserMapper userMapper = new UserMapper();
+    UserMapperMapStruct userMapper = Mappers.getMapper(UserMapperMapStruct.class);
     UserDtoValidator userDtoValidator = new UserDtoValidator();
-
-    private final UserDao userDao = new UserDaoImpl();
+    UserDao userDao = new UserDaoImpl();
 
     /**
      * Возвращает UserDto для пользователя с указанным ID.

@@ -36,12 +36,11 @@ public class UserDtoValidator {
     public void validate(UserDto userDto) {
         Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
 
-        if (!violations.isEmpty()) {
+        if (violations.isEmpty()) {
+        } else {
             for (ConstraintViolation<UserDto> violation : violations) {
                 log.info(violation.getMessage());
             }
-        } else {
-            log.info("Валидация прошла успешно");
         }
     }
 }
